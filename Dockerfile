@@ -10,4 +10,4 @@ EXPOSE 8080
 
 ENV NAME Converter
 
-CMD ["python3", "main.py"]
+CMD ["python", "main.py"]
