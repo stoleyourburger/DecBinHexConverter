@@ -1,6 +1,6 @@
 FROM python:3.8-slim
 
-WORKDIR /app
+WORKDIR /actiona-runner/_work/DecBinHexConverter/DecBinHexConverter
 
 COPY . .
 
@@ -10,4 +10,4 @@ EXPOSE 8080
 
 ENV NAME Converter
 
-CMD ["python", "main.py"]
+CMD ["python3", "main.py"]
