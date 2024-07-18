@@ -32,7 +32,7 @@ def convert(value, input_format, output_format):
             case ("hex", "dec"):
                 return str(int(value, 16))
             case _:
-                return wrong_endpoint()
+                return wrong_endpoint(app)
 
     except ValueError:
         return f"Value '{value}' can't be converted from {input_format} to {output_format}."
@@ -40,7 +40,7 @@ def convert(value, input_format, output_format):
 
 # Wrong endpoint handler (Usage guide)
 @app.errorhandler(404)
-def wrong_endpoint():
+def wrong_endpoint(app):
     return """
         Binary <=> Decimal <=> Hexadecimal Converter  <br>
 <br>
