@@ -35,7 +35,7 @@ def convert(value, input_format, output_format):
                 return wrong_endpoint(app)
 
     except ValueError:
-        return f"Value '{value}' can't be converted from {input_format} to {output_format}."
+        return f"Value '{value}' can't be converted from {input_format} to {output_format}!"
 
 
 # Wrong endpoint handler (Usage guide)
