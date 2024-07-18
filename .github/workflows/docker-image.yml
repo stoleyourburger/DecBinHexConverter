@@ -29,5 +29,5 @@ jobs:
         context: .
         push: true
         tags: stoleyourburger/decbinhexconverter:latest
-    - name: Run the Docker image
+    - name: Apply Kubernetes deployment manifest
       run: kubectl apply -f /root/manifest.yml
