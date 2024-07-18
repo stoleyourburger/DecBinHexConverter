@@ -1,6 +1,6 @@
 FROM python:3.8-slim
 
-WORKDIR /actiona-runner/_work/DecBinHexConverter/DecBinHexConverter
+WORKDIR /root/actions-runner/_work/DecBinHexConverter/DecBinHexConverter
 
 COPY . .
 
