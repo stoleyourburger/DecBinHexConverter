@@ -4,8 +4,9 @@
 
 It includes integrated health check, usage guide and user input verification. <br>
 <br>
+**/.github/workflows/docker-image.yml**
 **/kubernetes/manifest.yml** - Configuration of automating the launching of pod instances (Deployment) and using NodePort to get external traffic (Service)<br>
-**/nging/site.conf** - Reverse proxy configuration<br>
+**/nginx/site.conf** - Reverse proxy configuration<br>
 **Dockerfile** - Instructions to build a container image<br>
 **main.py** - Application code<br>
 **requirements.txt** - List of applcation dependencies<br>
