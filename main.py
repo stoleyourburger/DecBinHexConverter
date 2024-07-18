@@ -1,5 +1,6 @@
-from flask import Flask
+from flask import Flask, abort
 from markupsafe import escape
+import enum
 
 
 app = Flask(__name__)
@@ -11,38 +12,41 @@ def health_check():
     return "OK"
 
 
-@app.route("/convert/<value>/<input_format>/<output_format>")
-def convert(value, input_format, output_format):
+class Bases(enum.IntEnum):
+    bin = 2
+    dec = 10
+    hex = 16
 
-    if input_format == output_format:
-        return escape(value)
+
+@app.route("/convert/<value>/<input_format>/<output_format>")
+def from_dec(value, input_format, output_format):
 
     try:
-        match (escape(input_format), escape(output_format)):
-            case ("bin", "dec"):
-                return str(int(value, 2))
-            case ("bin", "hex"):
-                return hex((int(value, 2))).replace("0x", "").upper()
-            case ("dec", "bin"):
-                return bin(int(value)).replace("0b", "")
-            case ("dec", "hex"):
-                return hex((int(value, 10))).replace("0x", "").upper()
-            case ("hex", "bin"):
-                return bin(int(value, 16)).replace("0b", "")
-            case ("hex", "dec"):
-                return str(int(value, 16))
+        decimal_value = int(value, Bases[escape(input_format)])
+        match escape(output_format):
+            case "bin":
+                return f"{decimal_value:b}"
+            case "hex":
+                return f"{decimal_value:x}".upper()
+            case "dec":
+                return f"{decimal_value}"
             case _:
-                return wrong_endpoint(app)
+                abort(400, description=f"Unknown output format: {output_format}")
+
+    except KeyError:
+        abort(400, description=f"Unknown input format: {input_format}")
 
     except ValueError:
-        return f"Value '{value}' can't be converted from {input_format} to {output_format}."
+        abort(
+            400,
+            description=f"Value '{value}' can't be converted from {input_format} to {output_format}.",
+        )
 
 
-# Wrong endpoint handler (Usage guide)
 @app.errorhandler(404)
-def wrong_endpoint(app):
+def wrong_endpoint(e):
     return """
-        Binary <=> Decimal <=> Hexadecimal Converter  <br>
+Binary <=> Decimal <=> Hexadecimal Converter  <br>
 <br>
 This tool allows you to convert values between binary, decimal and hexadecimal formats. <br> 
 To use the converter, you need to specify the initial value, input format, and output format in the following path structure: <br>
@@ -56,14 +60,14 @@ Arguments to use: <br>
 value: The alphanumeric value to be converted. This must be in the format specified by input_format. <br>
 <br>
 input_format: The format of the input value. Possible values: <br>
-        bin: Binary (base-2) <br>
-        dec: Decimal (base-10) <br>
-        hex: Hexadecimal (base-16) <br>
+bin: Binary (base-2) <br>
+dec: Decimal (base-10) <br>
+hex: Hexadecimal (base-16) <br>
 <br>
 output_format: The desired format for the output value. Possible values: <br>
-        bin: Binary (base-2) <br>
-        dec: Decimal (base-10) <br>
-        hex: Hexadecimal (base-16) <br>
+bin: Binary (base-2) <br>
+dec: Decimal (base-10) <br>
+hex: Hexadecimal (base-16) <br>
 <br>
 Ensure that the value matches the specified input_format. For example, if input_format is bin, the value should be a binary number. <br>
 <br>
@@ -85,4 +89,4 @@ This will convert the hexadecimal value A1FF to its binary equivalent. <br>
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=8080)
+    app.run(host="0.0.0.0", port=8080, debug=True)
