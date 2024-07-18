@@ -1,0 +1,43 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: decbinhexconverter-master-deployment
+  labels:
+    app: decbinhexconverter-master
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: decbinhexconverter-master
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: decbinhexconverter-master
+    spec:
+      containers:
+      - name: decbinhexconverter-master
+        image: stoleyourburger/decbinhexconverter
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        imagePullPolicy: Always
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: converter-master-service
+spec:
+ type: NodePort
+ selector:   
+  app: decbinhexconverter-master
+ ports: 
+ - port: 8080
+   targetPort: 8080
+   nodePort: 30080
