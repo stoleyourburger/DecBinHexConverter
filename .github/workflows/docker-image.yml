@@ -29,10 +29,5 @@ jobs:
         context: .
         push: true
         tags: stoleyourburger/decbinhexconverter:latest
-
-  publish:
-    runs-on: self-hosted
-
-    steps:
-      - name: Run the Docker image
-        run: docker run -d --name DecBinHexConverter -p 8080:8080 stoleyourburger/decbinhexconverter:latest
+    - name: Run the Docker image
+      run: docker restart DecBinHexConverter
