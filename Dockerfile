@@ -1,4 +1,4 @@
-FROM python:3.8-slim
+FROM python:3.13-rc-bookworm
 
 WORKDIR /root/actions-runner/_work/DecBinHexConverter/DecBinHexConverter
 
