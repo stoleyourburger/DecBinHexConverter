@@ -16,7 +16,5 @@ It includes integrated health check, usage guide and user input verification. <b
 **Self-hosted** (Ubuntu 22.04):<br>
   **Github Runner** configured with Github Actions<br>
   **Docker**<br>
-  **Kubernetes**:<br>
-    **k3s** with multiple pods deployed for high availability and load balancing<br>
-    **NodePort** service as the external entry point for incoming requests from nginx<br>
+  **Kubernetes**: **k3s** with multiple pods deployed for high availability and load balancing; **NodePort** service as the external entry point for incoming requests from nginx<br>
   **Nginx** used as a reverse proxy for incoming user connections on 8080/TCP forwarding them to NodePort's 30080/TCP<br>
