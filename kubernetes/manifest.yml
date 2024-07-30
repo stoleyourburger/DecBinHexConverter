@@ -23,10 +23,10 @@ spec:
       containers:
       - name: decbinhexconverter
         image: stoleyourburger/decbinhexconverter
-        # resources:
-        #   limits:
-        #     memory: 512Mi
-        #     cpu: "1"
+        resources:
+          limits:
+            cpu: "0.1"
+            memory: 128Mi
         ports:
         - containerPort: 8080
           protocol: TCP
