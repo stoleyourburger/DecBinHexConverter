@@ -29,5 +29,6 @@ jobs:
         context: .
         push: true
         tags: stoleyourburger/decbinhexconverter:latest
+        
     - name: Apply Kubernetes deployment manifest
       run: kubectl apply -f /root/actions-runner/_work/DecBinHexConverter/DecBinHexConverter/kubernetes/manifest.yml
