@@ -1,15 +1,15 @@
----
+---         
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: decbinhexconverter-master-deployment
+  name: decbinhexconverter-deployment
   labels:
-    app: decbinhexconverter-master
+    app: decbinhexconverter
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: decbinhexconverter-master
+      app: decbinhexconverter
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -18,11 +18,15 @@ spec:
   template:
     metadata:
       labels:
-        app: decbinhexconverter-master
+        app: decbinhexconverter
     spec:
       containers:
-      - name: decbinhexconverter-master
+      - name: decbinhexconverter
         image: stoleyourburger/decbinhexconverter
+        resources:
+          limits:
+            memory: 512Mi
+            cpu: "1"
         ports:
         - containerPort: 8080
           protocol: TCP
@@ -32,11 +36,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: converter-master-service
+  name: converter-service
 spec:
  type: NodePort
  selector:   
-  app: decbinhexconverter-master
+  app: decbinhexconverter
  ports: 
  - port: 8080
    targetPort: 8080
