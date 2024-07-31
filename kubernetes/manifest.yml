@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: decbinhexconverter
-        image: stoleyourburger/decbinhexconverter:$(date +%s)
+        image: stoleyourburger/decbinhexconverter:latest
         ports:
         - containerPort: 8080
           protocol: TCP
