@@ -7,14 +7,11 @@ metadata:
     app: decbinhexconverter
 spec:
   replicas: 3
-  selector:
-    matchLabels:
-      app: decbinhexconverter
   strategy:
+    type: RollingUpdate
     rollingUpdate:
       maxSurge: 1
       maxUnavailable: 1
-    type: RollingUpdate
   template:
     metadata:
       labels:
