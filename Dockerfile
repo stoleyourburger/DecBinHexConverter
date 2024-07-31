@@ -8,6 +8,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 8080
 
-ENV NAME Converter
+ENV NAME=Converter
 
 CMD ["python3", "main.py"]
