@@ -27,4 +27,4 @@ jobs:
         tags: stoleyourburger/decbinhexconverter:latest
         
     - name: Apply Kubernetes deployment manifest
-      run: kubectl apply -f kubernetes/manifest.yml
+      run: kubectl apply -f k8s/manifest.yml
