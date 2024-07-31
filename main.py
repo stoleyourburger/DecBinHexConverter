@@ -9,7 +9,7 @@ app = Flask(__name__)
 # Health check
 @app.route("/health")
 def health_check():
-    return "OK!!"
+    return "OK"
 
 
 class Bases(enum.IntEnum):
