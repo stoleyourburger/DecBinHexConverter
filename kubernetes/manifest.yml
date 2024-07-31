@@ -7,6 +7,9 @@ metadata:
     app: decbinhexconverter
 spec:
   replicas: 3
+  selector:
+    matchLabels:
+      app: decbinhexconverter
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -19,7 +22,7 @@ spec:
     spec:
       containers:
       - name: decbinhexconverter
-        image: stoleyourburger/decbinhexconverter
+        image: stoleyourburger/decbinhexconverter:latest
         ports:
         - containerPort: 8080
           protocol: TCP
