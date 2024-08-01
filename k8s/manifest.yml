@@ -6,7 +6,7 @@ metadata:
   labels:
     app: decbinhexconverter
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: decbinhexconverter
@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: decbinhexconverter
-        image: stoleyourburger/decbinhexconverter:1.0.0
+        image: stoleyourburger/decbinhexconverter:1.0.1
         ports:
         - containerPort: 8080
           protocol: TCP
